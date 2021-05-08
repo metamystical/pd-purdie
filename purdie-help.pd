@@ -1,0 +1,32 @@
+#N canvas 5 21 698 212 10;
+#X obj 76 84 purdie 0 9 0.25;
+#X floatatom 109 52 4 0 0 0 - - -;
+#X floatatom 158 52 4 0 0 0 - - -;
+#X floatatom 208 52 4 0 0 0 - - -;
+#X floatatom 208 97 4 0 0 0 - - -;
+#X floatatom 76 125 4 0 0 0 - - -;
+#X obj 76 52 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X text 106 32 lower;
+#X text 155 32 upper;
+#X text 205 32 fraction;
+#X text 205 75 extra;
+#X text 286 22 Purdie - outputs all of the integers in a specified
+range in random order without repeating any \, then reshuffles;
+#X text 286 50 bang: output next integer in the series;
+#X text 286 66 lower: lower bound of range;
+#X text 286 82 upper: upper bound of range;
+#X text 286 98 fraction: (0 <= fraction <= 0.5) if nonzero \, ensures
+that the last fraction of the series is not repeated at the beginning
+of the next;
+#X text 286 140 extra: integer added to the series (mutes if
+already in the series);
+#X text 285 170 Changing lower \, upper or fraction causes reset and
+reshuffle;
+#X text 286 186 Changing extra reshuffles;
+#X connect 0 0 5 0;
+#X connect 1 0 0 1;
+#X connect 2 0 0 2;
+#X connect 3 0 0 3;
+#X connect 4 0 0 4;
+#X connect 6 0 0 0;

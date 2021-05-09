@@ -55,8 +55,8 @@ void fillArray (struct node *p, t_purdie *x) {
 void freeTree (struct node *p) {
   if (p == NULL) return;
   freeTree(p->left);
-  freebytes(p, sizeof(struct node));
   freeTree(p->right);
+  freebytes(p, sizeof(struct node));
 }
 
 int randomInt (int a, int b) { // returns random int in interval [a, b]

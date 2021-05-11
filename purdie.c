@@ -1,13 +1,12 @@
 #include "m_pd.h"
-
 #include <stdlib.h>
 #include <time.h>
 
 t_class *purdie_class;
 
-typedef struct node {
-  struct node *left;
-  struct node *right;
+typedef struct purdie_node {
+  struct purdie_node *left;
+  struct purdie_node *right;
   int num;
   int mute;
 };
@@ -23,57 +22,57 @@ typedef struct purdie {
   int array_size;
   int *array;
   int index;
-  struct node *root;
+  struct purdie_node *root;
 } t_purdie;
 
-struct node *addNode (struct node *p, int n) {
+struct purdie_node *purdie_addNode (struct purdie_node *p, int n) {
   if (p == NULL) {
-    p = (struct node *)getbytes(sizeof(struct node));
+    p = (struct purdie_node *)getbytes(sizeof(struct purdie_node));
     p->num = n;
     p->mute = 0;
     p->left = NULL;
     p->right = NULL;
   }
-  else if (n < p->num) p->left = addNode(p->left, n);
-  else if (n > p->num) p->right = addNode(p->right, n);
+  else if (n < p->num) p->left = purdie_addNode(p->left, n);
+  else if (n > p->num) p->right = purdie_addNode(p->right, n);
   else if (n == p->num) p->mute = !p->mute;
   return p;
 }
 
-int getTreeSize (struct node *p) {
+int purdie_getTreeSize (struct purdie_node *p) {
   if (p == NULL) return 0;
-  return getTreeSize(p->left) + getTreeSize(p->right) + !p->mute;
+  return purdie_getTreeSize(p->left) + purdie_getTreeSize(p->right) + !p->mute;
 }
 
-void fillArray (struct node *p, t_purdie *x) {
+void purdie_fillArray (struct purdie_node *p, t_purdie *x) {
   if (p == NULL) return;
-  fillArray(p->left, x);
+  purdie_fillArray(p->left, x);
   if (!p->mute) x->array[x->index++] = p->num;
-  fillArray(p->right, x);
+  purdie_fillArray(p->right, x);
 }
 
-void freeTree (struct node *p) {
+void purdie_freeTree (struct purdie_node *p) {
   if (p == NULL) return;
-  freeTree(p->left);
-  freeTree(p->right);
-  freebytes(p, sizeof(struct node));
+  purdie_freeTree(p->left);
+  purdie_freeTree(p->right);
+  freebytes(p, sizeof(struct purdie_node));
 }
 
-int randomInt (int a, int b) { // returns random int in interval [a, b]
+int purdie_randomInt (int a, int b) { // returns random int in interval [a, b]
   double random = (double)rand() / (double)((unsigned)RAND_MAX + 1); // [0.0, 1.0)
   return (int)(random * (b - a + 1)) + a;
 }
 
-void shuffleArray(t_purdie *x, int begin, int end) { // Fisher–Yates shuffle algorithm
+void purdie_shuffleArray(t_purdie *x, int begin, int end) { // Fisher–Yates shuffle algorithm
   for (int i = end; i > begin; i--) { // shuffle
-    int j = randomInt(begin, i);
+    int j = purdie_randomInt(begin, i);
     int tmp = x->array[i];
     x->array[i] = x->array[j];
     x->array[j] = tmp;
   }
 }
 
-void reset (t_purdie *x) {
+void purdie_reset (t_purdie *x) {
   if (x->upper < x->lower) {
     error("[purdie ]: upper < lower - swapping");
     int tmp = x->upper;
@@ -89,52 +88,52 @@ void reset (t_purdie *x) {
     x->fraction = 0;
   }
   if (x->root == NULL) {
-    for (int i = 0; i < x->upper - x->lower + 1; i++) x->root = addNode(x->root, x->lower + i);
+    for (int i = 0; i < x->upper - x->lower + 1; i++) x->root = purdie_addNode(x->root, x->lower + i);
   }
-  x->array_size = getTreeSize(x->root);
+  x->array_size = purdie_getTreeSize(x->root);
   x->array = (int *)getbytes(x->array_size * sizeof(int));
   x->index = 0;
-  fillArray(x->root, x);
+  purdie_fillArray(x->root, x);
   x->index = 0;
   x->fracint = (int)(x->fraction * x->array_size);
-  shuffleArray(x, 0, x->array_size - 1); // full shuffle
+  purdie_shuffleArray(x, 0, x->array_size - 1); // full shuffle
 }
 
 void purdie_bang (t_purdie *x) {
   if (x->index == x->array_size) {
-    if(x->fracint) shuffleArray(x, 0, x->array_size - x->fracint - 1); // omit last fraction
-    shuffleArray(x, x->fracint, x->array_size - 1); // omit first fraction
+    if(x->fracint) purdie_shuffleArray(x, 0, x->array_size - x->fracint - 1); // omit last fraction
+    purdie_shuffleArray(x, x->fracint, x->array_size - 1); // omit first fraction
     x->index = 0;
   }
   outlet_float(x->out_series, (float)x->array[x->index++]);
 }
 
-void freeReset (t_purdie *x) {
+void purdie_freeReset (t_purdie *x) {
   freebytes(x->array, x->array_size);
-  freeTree(x->root);
+  purdie_freeTree(x->root);
   x->root = NULL;
-  reset(x);
+  purdie_reset(x);
 }
   
 void purdie_lower (t_purdie *x, t_floatarg f) {
   x->lower = (int)f;
-  freeReset(x);
+  purdie_freeReset(x);
 }
 
 void purdie_upper (t_purdie *x, t_floatarg f) {
   x->upper = (int)f;
-  freeReset(x);
+  purdie_freeReset(x);
 }
 
 void purdie_fraction (t_purdie *x, t_floatarg f) {
   x->fraction = f;
-  freeReset(x);
+  purdie_freeReset(x);
 }
 
 void purdie_extra (t_purdie *x, t_floatarg f) {
-  x->root = addNode(x->root, (int)f);
+  x->root = purdie_addNode(x->root, (int)f);
   freebytes(x->array, x->array_size);
-  reset(x);
+  purdie_reset(x);
 }
 
 void *purdie_new (t_floatarg lower, t_floatarg upper, t_floatarg fraction) {
@@ -149,7 +148,7 @@ void *purdie_new (t_floatarg lower, t_floatarg upper, t_floatarg fraction) {
   x->upper = (int)upper;
   x->fraction = fraction;
   x->root = NULL;
-  reset(x);
+  purdie_reset(x);
   return (void *)x;
 }
 
@@ -160,7 +159,7 @@ void purdie_free(t_purdie *x) {
   inlet_free(x->in_extra);
   inlet_free(x->in_fraction);
   outlet_free(x->out_series);
-  freeTree(x->root);
+  purdie_freeTree(x->root);
 }
 
 void purdie_setup(void) {

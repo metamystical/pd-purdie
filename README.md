@@ -1,4 +1,4 @@
-## purdie
+## pd-purdie
 Enhancement of [[shuffle ] object](https://github.com/metamystical/pd-shuffle) for Pure Data.
 
 ### Description

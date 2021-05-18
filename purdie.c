@@ -155,7 +155,7 @@ void *purdie_new (t_floatarg lower, t_floatarg upper, t_floatarg fraction) {
 }
 
 void purdie_free(t_purdie *x) {
-  freebytes(x->array, x->array_size);
+  if (x->array_size) freebytes(x->array, x->array_size);
   inlet_free(x->in_lower);
   inlet_free(x->in_upper);
   inlet_free(x->in_extra);

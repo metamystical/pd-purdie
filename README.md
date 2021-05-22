@@ -20,6 +20,8 @@ Inputs are described in the following table:
 
 note: the initial values of **fraction** can be specified within the object box itself [purdie fraction ]. Default is zero.
 
+note:  Use in combination with [[seq ]](https://github.com/metamystical/pd-seq) to initialize to a range of integers as in [shuffle ]. Connect the output of [seq ] to the **integer** input.
+
 ### Installation
 
 The purdie.c file can be compiled into a Pure Data external using [pure-data/pd-lib-builder](https://github.com/pure-data/pd-lib-builder). Simply place the linked file (e.g. purdie.pd_linux) along with the help patch purdie-help.pd into the same directory as your patch, or somewhere on the Pd search path (e.g., externals/purdie folder).

@@ -20,7 +20,7 @@ Inputs are described in the following table:
 
 note: the initial values of **fraction** can be specified within the object box itself [purdie fraction ]. Default is zero.
 
-note:  Use in combination with [[seq ]](https://github.com/metamystical/pd-seq) to initialize to a range of integers as in [shuffle ]. Connect the output of [seq ] to the **integer** input.
+note:  Use in combination with [[seq ]](https://github.com/metamystical/pd-seq) to initialize to a range of integers similar to [shuffle ]. Connect the output of [seq ] to the **integer** input.
 
 ### Installation
 

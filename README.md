@@ -11,16 +11,16 @@ Add an integer to the series by sending it to the leftmost input. If the integer
 
 Inputs are described in the following table:
 
-| Label    | Input | Type    | Action                                                                                                                                 |
-|----------|---------|---------|----------------------------------------------------------------------------------------------------------------------------------------|
+| Selector     | Input   | Type     | Action                            |
+|--------------|---------|----------|-----------------------------------|
 | **bang**     | 0       | active   | output next integer in the series |
-| **integer**   | 0       | passive  | add an integer to the series and reshuffle |
+| **number**   | 0       | passive  | add an integer to the series and reshuffle |
 | **reset**    | 0       | passive  | empty the series |
 | **fraction** | 1       | passive  | update **fraction** (0 <= **fraction** <= 0.5) - if nonzero, ensures that the last fraction (portion) of the series is not repeated at the beginning of the next series. Takes effect on the next reshuffle. Default is zero. |
 
 note: the initial values of **fraction** can be specified within the object box itself [purdie fraction ]. Default is zero.
 
-note:  Use in combination with [[seq ]](https://github.com/metamystical/pd-seq) to initialize to a range of integers similar to [shuffle ]. Connect the output of [seq ] to the **integer** input.
+note:  Use in combination with [[seq ]](https://github.com/metamystical/pd-seq) to initialize to a range of integers similar to [shuffle ]. Connect the output of [seq ] to the **number** input.
 
 ### Installation
 

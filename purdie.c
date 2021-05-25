@@ -144,6 +144,7 @@ void purdie_setup(void) {
     sizeof(t_purdie), CLASS_DEFAULT, A_DEFFLOAT, 0);
   class_addbang(purdie_class, (t_method)purdie_bang);
   class_addfloat(purdie_class, (t_method)purdie_number);
+  class_addmethod(purdie_class, (t_method)purdie_number, gensym("number"), A_DEFFLOAT, 0);
   class_addmethod(purdie_class, (t_method)purdie_reset, gensym("reset"), 0);
   class_addmethod(purdie_class, (t_method)purdie_fraction, gensym("fraction"), A_DEFFLOAT, 0);
   srand((unsigned)time(NULL));

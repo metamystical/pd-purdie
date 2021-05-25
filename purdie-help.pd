@@ -13,9 +13,6 @@ order without repeating any \, then reshuffles.;
 #X text 285 136 Initially the series is empty and bang has no effect.
 A reset message to the leftmost input returns the series to its initial
 state.;
-#X text 285 188 Add an integer to the series by sending it to the leftmost
-input. If the integer is alread in the series \, it will be removed.
-In either case \, a reshuffle occurs.;
 #X obj 83 205 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
 #X msg 166 107 0.25;
@@ -23,10 +20,14 @@ In either case \, a reshuffle occurs.;
 that the last fraction (portion) of the series is not repeated at the
 beginning of the next. Takes effect on the next reshuffle. Default
 is zero.;
-#X connect 0 0 11 0;
+#X text 31 29 number;
+#X text 285 188 number: add an integer to the series by sending it
+to the leftmost input. If the integer is alread in the series \, it
+will be removed. In either case \, a reshuffle occurs.;
+#X connect 0 0 10 0;
 #X connect 1 0 3 0;
 #X connect 3 0 0 0;
 #X connect 4 0 3 0;
 #X connect 5 0 3 0;
 #X connect 6 0 3 0;
-#X connect 12 0 3 1;
+#X connect 11 0 3 1;

@@ -15,7 +15,7 @@ Inputs are described in the following table:
 |--------------|---------|----------|-----------------------------------|
 | **bang**     | 0       | active   | output next integer in the series |
 | **number**   | 0       | passive  | add an integer to the series and reshuffle |
-| **reset**    | 0       | passive  | empty the series |
+| **reset**    | 0       | passive  | message to empty the series |
 | **fraction** | 1       | passive  | update **fraction** (0 <= **fraction** <= 0.5) - if nonzero, ensures that the last fraction (portion) of the series is not repeated at the beginning of the next series. Takes effect on the next reshuffle. Default is zero. |
 
 note: the initial values of **fraction** can be specified within the object box itself [purdie fraction ]. Default is zero.

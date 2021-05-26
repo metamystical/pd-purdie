@@ -17,17 +17,19 @@ order without repeating any \, then reshuffles.;
 #X text 267 64 fraction: (0 <= fraction <= 0.5) if nonzero \, ensures
 that the last fraction (portion) of the series is not repeated at the
 beginning of the next. Takes effect on the next reshuffle. Can be an
-argument in the purdie object: [purdie fraction]. Default is zero.;
+argument in the purdie object: [purdie fraction]. Default is zero.
+;
 #X text 267 186 number: add an integer to the series by sending it
-to the left input. If the integer is alread in the series \, it
-will be removed. In either case \, a reshuffle occurs.;
+to the left input. If the integer is alread in the series \, it will
+be removed. In either case \, a reshuffle occurs.;
 #X text 267 137 reset: initially the series is empty and bang has no
-effect. A reset message to the left input returns the series to
-its initial state.;
+effect. A reset message to the left input returns the series to its
+initial state.;
 #X text 267 237 'number' and 'fraction' can be each sent as messages
 to the left input \, each with one argument.;
 #X connect 0 0 1 0;
-#X connect 1 0 3 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
 #X connect 4 0 1 0;
 #X connect 5 0 1 0;
 #X connect 6 0 1 0;

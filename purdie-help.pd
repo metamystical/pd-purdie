@@ -1,33 +1,34 @@
-#N canvas 5 21 684 258 10;
-#X floatatom 83 175 4 0 0 0 - - -;
-#X obj 29 87 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+#N canvas 5 21 659 278 10;
+#X obj 39 109 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X text 197 108 fraction;
-#X obj 83 134 purdie 0.25;
-#X msg 83 31 1 \, 2 \, 3 \, 4;
-#X msg 136 69 reset;
-#X msg 42 49 3;
-#X text 285 22 Purdie - outputs a series of the integers in random
+#X obj 90 148 purdie 0.25;
+#X floatatom 90 185 4 0 0 0 - - -;
+#X obj 90 215 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 49 63 3;
+#X msg 105 45 1 \, 2 \, 3 \, 4;
+#X msg 143 83 reset;
+#X msg 173 121 0.25;
+#X text 47 46 number;
+#X text 170 104 fraction;
+#X text 267 12 Purdie - outputs a series of the integers in random
 order without repeating any \, then reshuffles.;
-#X text 285 55 bang: output next integer in the series.;
-#X obj 83 205 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
-#X msg 166 107 0.25;
-#X text 285 74 fraction: (0 <= fraction <= 0.5) if nonzero \, ensures
+#X text 267 45 bang: output next integer in the series.;
+#X text 267 64 fraction: (0 <= fraction <= 0.5) if nonzero \, ensures
 that the last fraction (portion) of the series is not repeated at the
-beginning of the next. Takes effect on the next reshuffle. Default
-is zero.;
-#X text 31 29 number;
-#X text 285 185 number: add an integer to the series by sending it
+beginning of the next. Takes effect on the next reshuffle. Can be an
+argument in the purdie object: [purdie fraction]. Default is zero.;
+#X text 267 186 number: add an integer to the series by sending it
 to the leftmost input. If the integer is alread in the series \, it
 will be removed. In either case \, a reshuffle occurs.;
-#X text 285 136 reset: initially the series is empty and bang has no
+#X text 267 137 reset: initially the series is empty and bang has no
 effect. A reset message to the leftmost input returns the series to
 its initial state.;
-#X connect 0 0 9 0;
+#X text 267 237 'number' and 'fraction' can be each sent as messages
+to the leftmost input \, each with one argument.;
+#X connect 0 0 1 0;
 #X connect 1 0 3 0;
-#X connect 3 0 0 0;
-#X connect 4 0 3 0;
-#X connect 5 0 3 0;
-#X connect 6 0 3 0;
-#X connect 10 0 3 1;
+#X connect 4 0 1 0;
+#X connect 5 0 1 0;
+#X connect 6 0 1 0;
+#X connect 7 0 1 1;

@@ -5,22 +5,22 @@ Related to [[shuffle ] object](https://github.com/metamystical/pd-shuffle) for P
 
 [purdie ] outputs a series of the integers in random order without repeating any, then reshuffles. 
 
-Initially the series is empty and bang has no effect. A reset message to the leftmost input returns the series to its initial state. 
+Initially the series is empty and bang has no effect. A **reset** message to the leftmost input returns the series to its initial state. 
 
-Add an integer to the series by sending it to the leftmost input. If the integer is alread in the series, it will be removed from the series until restored by adding it again. In either case, a reshuffle occurs.
+Add an integer to the series by sending it to the left input. If the integer is already in the series, it is removed from the series until restored by adding it again. In either case, a reshuffle occurs.
 
-Inputs are described in the following table:
+Inputs are described in the following table. All selectors can be sent as messages to the left input with arguments as specified:
 
-| Selector     | Input   | Type     | Action                            |
-|--------------|---------|----------|-----------------------------------|
-| **bang**     | 0       | active   | output next integer in the series |
-| **number**   | 0       | passive  | add an integer to the series and reshuffle |
-| **reset**    | 0       | passive  | message to empty the series |
-| **fraction** | 1       | passive  | update **fraction** (0 <= **fraction** <= 0.5) - if nonzero, ensures that the last fraction (portion) of the series is not repeated at the beginning of the next series. Takes effect on the next reshuffle. Default is zero. |
+| Selector     | Input | Message argument | Effect                            |
+|--------------|-------|------------------|-----------------------------------|
+| **bang**     | left  | none             | output next integer in the series |
+| **number**   | left  | float (truncated to integer)  | add an integer to the series and reshuffle |
+| **reset**    | left  | none             | message to empty the series |
+| **fraction** | right | float            | update **fraction** (0 <= **fraction** <= 0.5) - if nonzero, ensures that the last fraction (portion) of the series is not repeated at the beginning of the next series. Takes effect on the next reshuffle. Default is zero. |
 
-note: the initial values of **fraction** can be specified within the object box itself [purdie fraction ]. Default is zero.
+Note: the initial value of **fraction** can be specified within the object box itself [purdie fraction ]. Default is zero.
 
-note:  Use in combination with [[seq ]](https://github.com/metamystical/pd-seq) to initialize to a range of integers similar to [shuffle ]. Connect the output of [seq ] to the **number** input.
+Note:  Use in combination with [[seq ]](https://github.com/metamystical/pd-seq) to initialize to a range of integers similar to [shuffle ]. Connect the output of [seq ] to the **number** input.
 
 ### Installation
 

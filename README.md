@@ -13,10 +13,10 @@ Inputs are described in the following table. All selectors can be sent as messag
 
 | Selector     | Input | Message argument | Effect                            |
 |--------------|-------|------------------|-----------------------------------|
-| **bang**     | left  | none             | output next integer in the series |
-| **number**   | left  | float (truncated to integer)  | add an integer to the series and reshuffle |
-| **reset**    | left  | none             | message to empty the series |
-| **fraction** | right | float            | update **fraction** (0 <= **fraction** <= 0.5) - if nonzero, ensures that the last fraction (portion) of the series is not repeated at the beginning of the next series. Takes effect on the next reshuffle. Default is zero. |
+| **bang**     | left  | none             | Output next integer in the series. |
+| **number**   | left  | float (truncated to integer)  | Add an integer to the series and reshuffle. If the integer is already in the series, it is removed. |
+| **reset**    | left  | none             | Message to empty the series. |
+| **fraction** | right | float            | Update **fraction** (0 <= **fraction** <= 0.5) - if nonzero, ensures that the last fraction (portion) of the series is not repeated at the beginning of the next series. Takes effect on the next reshuffle. Default is zero. |
 
 Note: the initial value of **fraction** can be specified within the object box itself [purdie fraction ]. Default is zero.
 

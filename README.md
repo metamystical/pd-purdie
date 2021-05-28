@@ -5,7 +5,7 @@ Related to [[shuffle ] object](https://github.com/metamystical/pd-shuffle) for P
 
 [purdie ] outputs a series of the integers in random order without repeating any, then reshuffles. 
 
-Initially the series is empty and bang has no effect. A **reset** message to the leftmost input returns the series to its initial state. 
+Initially the series is empty and **bang** has no effect. A **reset** message to the leftmost input returns the series to its initial state. 
 
 Add an integer to the series by sending it to the left input. If the integer is already in the series, it is removed from the series until restored by adding it again. In either case, a reshuffle occurs.
 

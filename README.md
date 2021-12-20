@@ -3,7 +3,7 @@ Related to [[shuffle ] object](https://github.com/metamystical/pd-shuffle) for P
 
 ### Description
 
-[purdie ] outputs a series of the integers in random order without repeating any, then reshuffles. 
+[purdie ] outputs a series of integers in random order without repeating any, then reshuffles. 
 
 Initially the series is empty and **bang** has no effect. A **reset** message to the leftmost input returns the series to its initial state. 
 

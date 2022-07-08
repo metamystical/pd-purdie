@@ -121,6 +121,10 @@ void purdie_number (t_purdie *x, t_floatarg f) {
   purdie_shuffleArray(x, 0, x->array_size - 1); // full shuffle
 }
 
+void purdie_list (t_purdie *x, t_symbol *s, int argc, t_atom *argv) {
+    for (int i = 0; i < argc; i++) purdie_number(x, atom_getfloat(argv + i));
+}
+
 void *purdie_new (t_floatarg fraction) {
   t_purdie *x = (t_purdie *)pd_new(purdie_class);
   // leftmost inlet automatically created (and freed)
@@ -144,6 +148,7 @@ void purdie_setup(void) {
     sizeof(t_purdie), CLASS_DEFAULT, A_DEFFLOAT, 0);
   class_addbang(purdie_class, (t_method)purdie_bang);
   class_addfloat(purdie_class, (t_method)purdie_number);
+  class_addlist(purdie_class, (t_method)purdie_list);
   class_addmethod(purdie_class, (t_method)purdie_number, gensym("number"), A_DEFFLOAT, 0);
   class_addmethod(purdie_class, (t_method)purdie_reset, gensym("reset"), 0);
   class_addmethod(purdie_class, (t_method)purdie_fraction, gensym("fraction"), A_DEFFLOAT, 0);

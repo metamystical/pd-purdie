@@ -7,7 +7,7 @@ Related to [[shuffle ] object](https://github.com/metamystical/pd-shuffle) for P
 
 Initially the series is empty and **bang** has no effect. A **reset** message to the leftmost input returns the series to its initial state. 
 
-Add an integer to the series by sending it to the left input. If the integer is already in the series, it is removed from the series until restored by adding it again. In either case, a reshuffle occurs.
+Add an integer to the series by sending it to the left input. If the integer is already in the series, it is removed from the series until restored by adding it again. In either case, a reshuffle occurs. If a list of numbers is input, they will be added one at a time in order from left to right.
 
 Inputs are described in the following table. All selectors can be sent as messages to the left input with arguments as specified:
 
